@@ -4,9 +4,14 @@ global:
 
 api:
   dashboard: true
+  disabledashboardad: true
 
 log:
-  level: INFO
+    level: INFO
+    format: common
+accessLog:
+    format: common
+
 
 serverTransport:
   insecureSkipVerify: true

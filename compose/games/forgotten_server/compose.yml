@@ -1,0 +1,32 @@
+services:
+  mariadb:
+    image: lscr.io/linuxserver/mariadb:latest
+    container_name: forgotten_mariadb
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - MYSQL_ROOT_PASSWORD=supersecretpasswordowo
+      - MYSQL_DATABASE=owo
+      - MYSQL_USER=uwu
+      - MYSQL_PASSWORD=supersecretpassworduwu
+    volumes:
+      - ./mariadb:/config
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+    
+  srv:
+    build: ./tfs
+    image: localimage.sh/tfs:latest
+    container_name: tfs
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ./srv:/srv
+    ports:
+      - 7071:7071
+      - 7072:7072
+    restart: unless-stopped
