@@ -1,8 +1,9 @@
-.env
-*.env
+**/.env
+**/.env.*
+!**/.env.example
+!**/*.enc.env
 
 compose/apps/srs/srs/data/
-
 compose/apps/forgejo/mysql/
 compose/apps/forgejo/forgejo/
 
