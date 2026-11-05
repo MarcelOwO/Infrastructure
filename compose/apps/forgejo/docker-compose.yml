@@ -11,15 +11,15 @@ services:
       - USER_GID=1000
       - FORGEJO__database__DB_TYPE=mysql
       - FORGEJO__database__HOST=db:3306
-      - FORGEJO__database__NAME=forgejo
-      - FORGEJO__database__USER=forgejo
-      - FORGEJO__database__PASSWD=forgejo
+      - FORGEJO__database__NAME=${FORGEJO__database__NAME}
+      - FORGEJO__database__USER=${FORGEJO__database__USER}
+      - FORGEJO__database__PASSWD=${FORGEJO__database__PASSWD}
     restart: always
     networks:
       - proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.git.rule=Host(`git.marcel-sigl.dev`)"
+      - "traefik.http.routers.git.rule=Host(`git.${BASE_DOMAIN:?BASE_DOMAIN is required}`)"
       - "traefik.http.routers.git.entrypoints=websecure"
       - "traefik.http.routers.git.tls=true"
       - "traefik.http.services.git.loadbalancer.server.port=3000"
@@ -38,10 +38,10 @@ services:
     image: mysql:8
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=forgejo
-      - MYSQL_USER=forgejo
-      - MYSQL_PASSWORD=forgejo
-      - MYSQL_DATABASE=forgejo
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
     networks:
       - proxy
     volumes:

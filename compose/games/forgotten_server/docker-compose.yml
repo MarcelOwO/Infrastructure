@@ -29,4 +29,11 @@ services:
     ports:
       - 7071:7071
       - 7072:7072
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=Host(`tfs.${BASE_DOMAIN:?BASE_DOMAIN is required}`)"
+      - "traefik.http.routers.grafana.entrypoints=websecure"
+      - "traefik.http.routers.grafana.tls.certresolver=myresolver"
+      - "traefik.http.routers.grafana.middlewares=local-only@file"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
     restart: unless-stopped

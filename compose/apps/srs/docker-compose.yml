@@ -11,7 +11,7 @@ services:
       - ./srs/data:/data
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.stream.rule=Host(`stream.marcel-sigl.dev`)"
+      - "traefik.http.routers.stream.rule=Host(`stream.${BASE_DOMAIN:?BASE_DOMAIN is required}`)"
       - "traefik.http.routers.stream.entrypoints=websecure"
       - "traefik.http.routers.stream.tls=true"
       - "traefik.http.routers.stream.tls.certresolver=myresolver"

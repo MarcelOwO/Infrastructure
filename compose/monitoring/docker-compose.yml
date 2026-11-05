@@ -25,10 +25,10 @@ services:
     depends_on:
       - prometheus
     environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_USER=${GF_SECURITY_ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
       - GF_USERS_ALLOW_SIGN_UP=false
-      - GF_SERVER_ROOT_URL=https://grafana.marcel-sigl.dev
+      - GF_SERVER_ROOT_URL=https://grafana.${BASE_DOMAIN:?BASE_DOMAIN is required}
     ports:
       - "3000:3000"
     volumes:
@@ -37,7 +37,7 @@ services:
     networks: [proxy]
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=Host(`grafana.marcel-sigl.dev`)"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.${BASE_DOMAIN:?BASE_DOMAIN is required}`)"
       - "traefik.http.routers.grafana.entrypoints=websecure"
       - "traefik.http.routers.grafana.tls.certresolver=myresolver"
       - "traefik.http.routers.grafana.middlewares=local-only@file"

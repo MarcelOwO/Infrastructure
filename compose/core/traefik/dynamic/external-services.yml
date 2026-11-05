@@ -3,18 +3,18 @@ http:
     insecure-skipverify:
       insecureSkipVerify: true
 
-  routers:
-    images:
-      rule: Host(`images.marcel-sigl.dev`)
-      entryPoints:
-        - websecure
-      service: images-svc
-      tls: 
-        certResolver: myresolver
+  #routers:
+  #  images:
+  #    rule: Host(`images.marcel-sigl.dev`)
+  #    entryPoints:
+  #      - websecure
+  #    service: images-svc
+  #    tls:
+  #      certResolver: myresolver
 
-  services:
-    images-svc:
-      loadBalancer:
-        serversTransport: insecure-skipverify
-        servers:
-          - url: http://10.0.0.11:2283
+  #services:
+  #  images-svc:
+  #    loadBalancer:
+  #      serversTransport: insecure-skipverify
+  #      servers:
+  #        - url: http://10.0.0.11:2283
